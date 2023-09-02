@@ -1,0 +1,48 @@
+<div class="navbar navbar-dark bg-primary shadow-sm">
+  <div class="navbar-brand align-item-center d-flex">
+    <i routerLink="products" class="heading fas fa-shipping-fast">&nbsp; </i>
+    <strong
+      (click)="showAllProducts('')"
+      class="heading heading-title"
+      routerLink="products"
+      >E-kart</strong
+    >
+    <div class="input-group">
+      <div class="form-outline">
+        <form
+          class="search-form"
+          #searchForm="ngForm"
+          (ngSubmit)="searchBoxContent(searchForm.value.searchTerm)"
+        >
+          <input
+            type="text"
+            ngModel
+            name="searchTerm"
+            placeholder="Search..."
+          />
+          <button type="submit" class="btn btn-primary">search</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div
+    (click)="loginUserButton()"
+    class="login-button"
+    *ngIf="isUserLogin === '0'"
+  >
+    <button class="btn">Login</button>
+  </div>
+  <div (click)="logOutUser()" class="nav-link" *ngIf="isUserLogin === '1'">
+    <button class="btn login-button">Logout</button>
+  </div>
+  <button routerLink="wishlist" class="btn btn-primary wishlist-button">
+    <i class="fas heart-icon fa-heart"></i>
+    <div class="badge bg-danger">{{ totalWishListItem }}</div>
+  </button>
+  <button routerLink="cart" class="btn btn-primary cart-button">
+    <i class="fas cart-icon fa-cart-plus"></i>
+    <div class="badge bg-danger">{{ totalCartItem }}</div>
+  </button>
+</div>
+<router-outlet></router-outlet>

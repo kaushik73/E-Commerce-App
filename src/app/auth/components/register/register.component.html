@@ -1,0 +1,174 @@
+<div class="container">
+  <form [formGroup]="registerUserForm">
+    <p *ngIf="showMessage" class="alert alert-success">
+      User Registered Succesfully!
+    </p>
+    <div class="form-control">
+      <label>User Name : </label>
+      <div class="form-control">
+        <input formControlName="name" />
+      </div>
+      <p
+        class="alert alert-danger"
+        class="alert alert-danger"
+        *ngIf="
+          registerUserForm.get('name')?.hasError('required') &&
+          registerUserForm.get('name')?.touched
+        "
+      >
+        Name is required
+      </p>
+      <p
+        class="alert alert-danger"
+        *ngIf="
+          registerUserForm.get('name')?.hasError('minlength') &&
+          registerUserForm.get('name')?.touched
+        "
+      >
+        Name is min. of 4 character
+      </p>
+    </div>
+    <div class="form-control">
+      <label>User Email</label>
+      <div class="form-control">
+        <input formControlName="email" />
+      </div>
+      <p
+        class="alert alert-danger"
+        *ngIf="
+          registerUserForm.get('email')?.hasError('required') &&
+          registerUserForm.get('email')?.touched
+        "
+      >
+        Email is required
+      </p>
+      <p
+        class="alert alert-danger"
+        *ngIf="
+          registerUserForm.get('email')?.hasError('email') &&
+          registerUserForm.get('email')?.touched
+        "
+      >
+        Correct Format Email is required
+      </p>
+    </div>
+    <div class="form-control">
+      <label>Contact Number : </label>
+      <div class="form-control">
+        <input type="text" formControlName="contactNumber" />
+      </div>
+      <p
+        class="alert alert-danger"
+        *ngIf="
+          registerUserForm.get('contactNumber')?.hasError('required') &&
+          registerUserForm.get('contactNumber')?.touched
+        "
+      >
+        Contact Number is required
+      </p>
+      <p
+        class="alert alert-danger"
+        *ngIf="
+          registerUserForm.get('contactNumber')?.hasError('minlength') &&
+          registerUserForm.get('contactNumber')?.touched
+        "
+      >
+        Contact Number should have 10 digits
+      </p>
+      <p
+        class="alert alert-danger"
+        *ngIf="
+          registerUserForm.get('contactNumber')?.hasError('maxlength') &&
+          registerUserForm.get('contactNumber')?.touched
+        "
+      >
+        Contact Number should have 10 digits
+      </p>
+      <p
+        class="alert alert-danger"
+        *ngIf="
+          registerUserForm.get('contactNumber')?.hasError('pattern') &&
+          registerUserForm.get('contactNumber')?.touched &&
+          !registerUserForm.get('contactNumber')?.hasError('minlength') &&
+          !registerUserForm.get('contactNumber')?.hasError('maxlength')
+        "
+      >
+        Contact Number has Numbers Only!
+      </p>
+    </div>
+    <div class="form-control">
+      <label>password : </label>
+      <div class="d-flex align-items-center form-control">
+        <input
+          [type]="passwordType"
+          formControlName="password"
+          class="input-password"
+        />
+        <span class="input-group-btn">
+          <a
+            (click)="togglePassword()"
+            class="btn btn-default reveal"
+            type="button"
+          >
+            <i [class]="eyeIconPassword"></i>
+          </a>
+        </span>
+      </div>
+      <p
+        class="alert alert-danger"
+        *ngIf="
+          registerUserForm.get('password')?.hasError('required') &&
+          registerUserForm.get('password')?.touched
+        "
+      >
+        Password is required
+      </p>
+      <p
+        class="alert alert-danger"
+        *ngIf="
+          registerUserForm.get('password')?.hasError('minlength') &&
+          registerUserForm.get('password')?.touched
+        "
+      >
+        Password should have minimum 6 digit
+      </p>
+    </div>
+    <div class="form-control">
+      <label>Confirm Password : </label>
+      <div class="d-flex align-items-center form-control">
+        <input
+          [type]="confirmPasswordType"
+          formControlName="confirmPassword"
+          class="input-password"
+        />
+        <span class="input-group-btn">
+          <a
+            (click)="toggleConfirmPassword()"
+            class="btn btn-default reveal"
+            type="button"
+          >
+            <i [class]="eyeIconConfirmPassword"></i>
+          </a>
+        </span>
+      </div>
+      <p
+        class="alert alert-danger"
+        *ngIf="
+          registerUserForm.hasError('mismatch') &&
+          !registerUserForm.hasError('minlength') &&
+          !registerUserForm.hasError('required') &&
+          registerUserForm.get('confirmPassword')?.touched
+        "
+      >
+        Passwords do not match.
+      </p>
+    </div>
+    <button
+      class="btn-submit"
+      (click)="addUserToFirebase()"
+      [disabled]="!registerUserForm.valid"
+    >
+      Register
+    </button>
+  </form>
+</div>

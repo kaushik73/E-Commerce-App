@@ -1,0 +1,25 @@
+<div class="admin-navbar">
+  <div class="text-center main">Welcome to Admin Panel</div>
+</div>
+<div class="sidenav" *ngIf="showAdminPannel">
+  <p (click)="toggleProductMenu()" class="heading">Products</p>
+  <div *ngIf="showProductMenu">
+    <a routerLink="add-product" (click)="goToAddProduct()">Add Products</a>
+    <a routerLink="/admin/add-category">Add/Edit Category</a>
+    <a routerLink="/admin/show-products">All Products</a>
+  </div>
+  <hr />
+  <p (click)="toggleUserMenu()" class="heading">Users</p>
+  <div *ngIf="showUsersMenu">
+    <a routerLink="/admin/users">Users</a>
+  </div>
+  <hr />
+  <p (click)="toggleOrderMenu()" class="heading">Orders</p>
+  <div *ngIf="showOrderMenu">
+    <a routerLink="/admin/orders">Orders</a>
+  </div>
+  <button (click)="logoutAdmin()" class="logout-button btn btn-outline-warning">
+    LogOut
+  </button>
+</div>
+<router-outlet></router-outlet>

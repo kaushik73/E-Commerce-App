@@ -1,0 +1,267 @@
+<div appAddMargin>
+  <h2 class="text-center">
+    {{ editProductMode ? "Edit Product" : "Add Product" }}
+  </h2>
+  <div class="form-area">
+    <form [formGroup]="addProductForm">
+      <div class="form-control">
+        <label>Product Title : </label>
+        <input class="form-control" formControlName="title" />
+        <p
+          class="alert alert-danger"
+          class="alert alert-danger"
+          *ngIf="
+            addProductForm.get('title')?.hasError('required') &&
+            addProductForm.get('title')?.touched
+          "
+        >
+          Title is required
+        </p>
+        <p
+          class="alert alert-danger"
+          *ngIf="
+            addProductForm.get('title')?.hasError('minlength') &&
+            addProductForm.get('title')?.touched
+          "
+        >
+          Title should have minimum 3 characters
+        </p>
+      </div>
+      <div class="form-control description-container">
+        <div class="description-title">
+          <label>Description</label>
+        </div>
+        <div class="description-content">
+          <textarea
+            rows="4"
+            class="form-control"
+            cols="50"
+            formControlName="description"
+          >
+          </textarea>
+        </div>
+        <p
+          class="alert alert-danger"
+          *ngIf="
+            addProductForm.get('description')?.hasError('required') &&
+            addProductForm.get('description')?.touched
+          "
+        >
+          Description is required
+        </p>
+        <p
+          class="alert alert-danger"
+          *ngIf="
+            addProductForm.get('description')?.hasError('minlength') &&
+            addProductForm.get('description')?.touched
+          "
+        >
+          Minimum 10 words are required
+        </p>
+      </div>
+      <div class="form-control">
+        <label>Brand: </label>
+        <input class="form-control" type="text" formControlName="brand" />
+        <p
+          class="alert alert-danger"
+          *ngIf="
+            addProductForm.get('brand')?.hasError('required') &&
+            addProductForm.get('brand')?.touched
+          "
+        >
+          Brand is required
+        </p>
+        <p
+          class="alert alert-danger"
+          *ngIf="
+            addProductForm.get('brand')?.hasError('minlength') &&
+            addProductForm.get('brand')?.touched
+          "
+        >
+          Minimum 3 character are required
+        </p>
+      </div>
+      <!-- CATEGORY -->
+      <div class="form-control">
+        <label>Category : </label>
+        <select
+          [(ngModel)]="selectedCategory"
+          (change)="getSelectedSubCategories()"
+          formControlName="category"
+          class="form-control"
+        >
+          <option selected disabled [value]="'none'">categories</option>
+          <option
+            *ngFor="let category of categories; let i = index"
+            [value]="category.category"
+          >
+            {{ category.category }}
+          </option>
+        </select>
+        <p
+          class="alert alert-danger"
+          *ngIf="
+            (addProductForm.get('category')?.hasError('required') &&
+              addProductForm.get('category')?.touched) ||
+            (addProductForm.get('category')?.hasError('minlength') &&
+              addProductForm.get('category')?.touched)
+          "
+        >
+          Category selection is required
+        </p>
+      </div>
+      <!-- Sub Category -->
+      <div class="form-control">
+        <label>Sub-Category : </label>
+        <select
+          [(ngModel)]="selectedSubCategory"
+          class="form-control"
+          formControlName="subCategory"
+        >
+          <option selected disabled [value]="'none'">Sub-Category</option>
+          <option
+            *ngFor="let category of filteredSubcategory; let i = index"
+            [value]="category"
+          >
+            {{ category }}
+          </option>
+        </select>
+        <p
+          class="alert alert-danger"
+          *ngIf="
+            (addProductForm.get('subCategory')?.hasError('required') &&
+              addProductForm.get('subCategory')?.touched) ||
+            (addProductForm.get('subCategory')?.hasError('minlength') &&
+              addProductForm.get('subCategory')?.touched)
+          "
+        >
+          Sub-Category selection is required
+        </p>
+      </div>
+      <!-- PRICE -->
+      <div class="form-control">
+        <label>Price : </label>
+        <input
+          type="number"
+          min="0"
+          formControlName="price"
+          class="form-control"
+        />
+        <p
+          class="alert alert-danger"
+          *ngIf="
+            (addProductForm.get('price')?.hasError('required') &&
+              addProductForm.get('price')?.touched) ||
+            (addProductForm.get('price')?.hasError('min') &&
+              addProductForm.get('price')?.touched)
+          "
+        >
+          Price is required and should be greater than zero
+        </p>
+      </div>
+      <!-- RATING -->
+      <div class="form-control">
+        <label>Rating : </label>
+        <input
+          type="number"
+          min="0"
+          formControlName="rating"
+          class="form-control"
+          placeholder="Range is 0 to 5"
+        />
+        <p
+          class="alert alert-danger"
+          *ngIf="
+            (addProductForm.get('rating')?.hasError('required') &&
+              addProductForm.get('rating')?.touched) ||
+            (addProductForm.get('rating')?.hasError('min') &&
+              addProductForm.get('rating')?.touched)
+          "
+        >
+          Rating is required between 0 to 5
+        </p>
+        <p
+          class="alert alert-danger"
+          *ngIf="
+            addProductForm.get('rating')?.value > 5 &&
+            addProductForm.get('rating')?.touched
+          "
+        >
+          Rating should be between 0 to 5
+        </p>
+      </div>
+      <!-- Thumbnail Add-->
+      <div *ngIf="!editProductMode" class="form-control">
+        <label>Thumbnail: </label>
+        <input
+          type="file"
+          formControlName="thumbnail"
+          accept="image/*"
+          class="form-control"
+          (change)="onThumbnailUpload($event)"
+          title="Choose a Image for your Product"
+        />
+        <p
+          class="alert alert-danger"
+          *ngIf="
+            (addProductForm.get('thumbnail')?.hasError('required') &&
+              addProductForm.get('thumbnail')?.touched) ||
+            (addProductForm.get('thumbnail')?.hasError('minlength') &&
+              addProductForm.get('thumbnail')?.touched)
+          "
+        >
+          Thumbnail is required
+        </p>
+        <p class="alert alert-info" *ngIf="imageUploading">
+          Uploading Image...
+        </p>
+      </div>
+      <div class="" *ngIf="editProductMode" class="form-control">
+        <label>New Thumbnail: </label>
+        <input
+          type="file"
+          class="new-thumbnail"
+          formControlName="thumbnail"
+          accept="image/*"
+          class="form-control"
+          src="{{ imageURL }}"
+          (change)="onThumbnailUpload($event)"
+        />
+        <p
+          class="alert alert-danger"
+          *ngIf="
+            (addProductForm.get('thumbnail')?.hasError('required') &&
+              addProductForm.get('thumbnail')?.touched) ||
+            (addProductForm.get('thumbnail')?.hasError('minlength') &&
+              addProductForm.get('thumbnail')?.touched)
+          "
+        >
+          Thumbnail is required
+        </p>
+        <p class="alert alert-info" *ngIf="imageUploading">
+          Uploading Image...
+        </p>
+      </div>
+      <div class="center-button">
+        <button
+          *ngIf="!editProductMode"
+          class="btn-submit btn btn-outline-dark form-control"
+          (click)="addProduct()"
+          [disabled]="!allDataCame"
+        >
+          Add Product
+        </button>
+      </div>
+      <div class="center-button">
+        <button
+          *ngIf="editProductMode"
+          class="btn-submit btn btn-outline-dark"
+          (click)="editFormMode(); updateProduct()"
+          [disabled]="!addProductForm.valid"
+        >
+          Edit Product
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

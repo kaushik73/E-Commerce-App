@@ -1,0 +1,67 @@
+<app-category-navbar
+  (filterName)="getSortingType($event)"
+  (selectedCategoryName)="getCategorySubCategoryType($event)"
+></app-category-navbar>
+<div class="loading-icon">
+  <div *ngIf="loading" class="spinner-border" role="status">
+    <span class="sr-only"></span>
+  </div>
+</div>
+<div *ngIf="(filterProducts | filters : searchKey).length == 0">
+  <img
+    class="no-products-to-show"
+    src="../../../assets/images/no-product-found.jpg"
+  />
+</div>
+<div class="card-deck">
+  <div
+    class="card"
+    *ngFor="
+      let product of filterProducts
+        | filters : searchKey
+        | sorting : sortingType
+        | paginate
+          : {
+              itemsPerPage: tableSize,
+              currentPage: page,
+              totalItems: count
+            }
+    "
+  >
+    <img
+      src="{{ product.thumbnail }}"
+      class="product-image"
+      (click)="showProductDetail(product.id)"
+    />
+    <h4 class="product-title text-center card-title title">
+      Title:
+      <span>
+        {{ product.title | uppercase }}
+      </span>
+    </h4>
+    <hr />
+    <h4 class="text-center card-title">Price : ${{ product.price }}</h4>
+    <h4 class="text-center card-title">Rating : {{ product.rating }}</h4>
+    <br />
+    <button
+      class="btn btn-primary show-detail"
+      (click)="showProductDetail(product.id)"
+    >
+      View More
+    </button>
+    <button
+      class="btn btn-warning add-to-cart text-black add-cart"
+      (click)="addToCart(product.id)"
+    >
+      Add Cart
+    </button>
+  </div>
+  <div class="d-flex w-100 my-2 mt-3 justify-content-center">
+    <pagination-controls
+      previousLabel="Prev"
+      nextLabel="Next"
+      (pageChange)="onTableDataChange($event)"
+    >
+    </pagination-controls>
+  </div>
+</div>

@@ -1,0 +1,11 @@
+.loading-icon {
+  width: 90vw;
+  margin: 0% 49%;
+}
+.cross-sign {
+  font-size: 17px;
+  font-weight: 700;
+}
+.user-name {
+  text-transform: capitalize;
+}

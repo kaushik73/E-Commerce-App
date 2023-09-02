@@ -1,0 +1,83 @@
+<div class="container">
+  <form [formGroup]="loginUserForm" class="add-employee">
+    <p *ngIf="isValidUser === '1'; else ErrorBlock" class="alert alert-success">
+      Welcome <span class="text-capitalize"></span>{{ userName }}!
+    </p>
+    <ng-template #ErrorBlock>
+      <p *ngIf="isValidUser === '0'" class="alert alert-danger">
+        Details are not correct!
+      </p>
+    </ng-template>
+    <div class="form-control">
+      <label>User Email</label>
+      <div class="form-control">
+        <input formControlName="email" />
+      </div>
+      <p
+        class="alert alert-danger"
+        *ngIf="
+          loginUserForm.get('email')?.hasError('required') &&
+          loginUserForm.get('email')?.touched
+        "
+      >
+        Email is required
+      </p>
+      <p
+        class="alert alert-danger"
+        *ngIf="
+          loginUserForm.get('email')?.hasError('email') &&
+          loginUserForm.get('email')?.touched
+        "
+      >
+        Correct Format Email is required
+      </p>
+    </div>
+    <div class="form-control">
+      <label>password : </label>
+      <div class="d-flex align-items-center form-control">
+        <input
+          [type]="passwordType"
+          formControlName="password"
+          class="input-password"
+        />
+        <span class="input-group-btn">
+          <a
+            (click)="togglePassword()"
+            class="btn btn-default reveal"
+            type="button"
+          >
+            <i [class]="eyeIcon"></i>
+          </a>
+        </span>
+      </div>
+      <p
+        class="alert alert-danger"
+        *ngIf="
+          loginUserForm.get('password')?.hasError('required') &&
+          loginUserForm.get('password')?.touched
+        "
+      >
+        Password is required
+      </p>
+      <p
+        class="alert alert-danger"
+        *ngIf="
+          loginUserForm.get('password')?.hasError('minlength') &&
+          loginUserForm.get('password')?.touched
+        "
+      >
+        Password should have minimum 6 digit
+      </p>
+    </div>
+    <button
+      class="btn btn-submit"
+      (click)="loginUserButton()"
+      [disabled]="!loginUserForm.valid"
+    >
+      Login
+    </button>
+    <button class="btn btn-submit" (click)="goToRegisterUser()">
+      Register
+    </button>
+  </form>
+</div>

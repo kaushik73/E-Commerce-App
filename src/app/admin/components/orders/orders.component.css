@@ -1,0 +1,27 @@
+.loading-icon {
+  width: 90vw;
+  margin: 0px 49%;
+}
+.all-orders {
+  border: 2px solid brown;
+}
+.title-box {
+  border-right: 2px solid black;
+  border-left: 2px solid black;
+  border-top: 2px solid black;
+  padding: 7px;
+  margin: 2px;
+}
+.price-box {
+  border-right: 2px solid black;
+  border-left: 2px solid black;
+  padding: 7px;
+  margin: 2px;
+  border-bottom: 2px solid black;
+}
+.detail-container {
+  padding: 3px;
+}
+.user-name {
+  text-transform: capitalize;
+}

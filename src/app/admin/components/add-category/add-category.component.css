@@ -1,0 +1,9 @@
+.category-input {
+  width: 300px;
+}
+.subcategory-input {
+  width: 100%;
+}
+.edit-button {
+  float: right;
+}

@@ -1,0 +1,174 @@
+<div appAddMargin>
+  <h4 class="text-center">
+    {{ editCategoryMode ? "Update Category" : "Add Category" }}
+  </h4>
+  <div *ngIf="!editCategoryMode">
+    <p
+      *ngIf="showAddCategoryMessage && !editCategoryMode"
+      class="alert alert-success"
+    >
+      Category Added Succesfully!
+    </p>
+    <form [formGroup]="addCategoryForm" class="d-flex">
+      <div class="form-control category-input">
+        <label>Category : </label>
+        <input formControlName="category" />
+      </div>
+      <button
+        class="btn-submit btn btn-outline-dark"
+        (click)="addCategory()"
+        [disabled]="!addCategoryForm.valid"
+      >
+        Add Category
+      </button>
+    </form>
+  </div>
+  <div *ngIf="editCategoryMode">
+    <p
+      *ngIf="showCategoryUpdateMessage && editCategoryMode"
+      class="alert alert-success"
+    >
+      Category Updated Succesfully!
+    </p>
+    <form [formGroup]="addCategoryForm" class="d-flex">
+      <div class="form-control category-input">
+        <label>Category : </label>
+        <input formControlName="category" />
+      </div>
+      <button
+        class="btn-submit btn btn-outline-dark"
+        (click)="updateCategory()"
+        [disabled]="!editCategoryMode"
+      >
+        Update Category
+      </button>
+    </form>
+  </div>
+  <hr />
+  <h4 class="text-center">
+    {{ editSubCategoryMode ? "Update Sub-Category" : "Add Sub-Category" }}
+  </h4>
+  <!-- Add subcategory start -->
+  <div *ngIf="!editSubCategoryMode">
+    <p
+      *ngIf="showSubCategoryUpdateMessage && !editSubCategoryMode"
+      class="alert alert-success"
+    >
+      Sub-Category Added Succesfully!
+    </p>
+    <form [formGroup]="addSubCategoryForm">
+      <div class="form-control">
+        <label>Category : </label>
+        <select [(ngModel)]="selectedCategory" formControlName="category">
+          <option selected disabled [value]="'none'">categories</option>
+          <option
+            *ngFor="let category of categories; let i = index"
+            [value]="category.category"
+          >
+            {{ category.category }}
+          </option>
+        </select>
+      </div>
+      <div class="form-control subcategory-input">
+        <label>Sub Category : </label>
+        <input formControlName="subCategory" />
+      </div>
+      <div>
+        <button
+          class="btn-submit btn btn-outline-dark"
+          (click)="addSubCategory()"
+          [disabled]="!addSubCategoryForm.valid"
+        >
+          Add Sub-Category
+        </button>
+      </div>
+    </form>
+  </div>
+  <!-- Add subcategory end-->
+  <!-- Update Category Start -->
+  <div *ngIf="editSubCategoryMode">
+    <p
+      *ngIf="showSubCategoryUpdateMessage && editSubCategoryMode"
+      class="alert alert-success"
+    >
+      Sub-Category Updated Succesfully!
+    </p>
+    <form [formGroup]="addSubCategoryForm">
+      <div class="form-control">
+        <label>Category : </label>
+        <select [(ngModel)]="selectedCategory" formControlName="category">
+          <option selected disabled [value]="'none'">categories</option>
+          <option
+            *ngFor="let category of categories; let i = index"
+            [value]="category.category"
+          >
+            {{ category.category }}
+          </option>
+        </select>
+      </div>
+      <div class="form-control subcategory-input">
+        <label>Sub Category : </label>
+        <input formControlName="subCategory" />
+      </div>
+      <div>
+        <button
+          class="btn-submit btn btn-outline-dark"
+          (click)="updateSubCategory()"
+          [disabled]="!addSubCategoryForm.valid"
+        >
+          Update Sub-Category
+        </button>
+      </div>
+    </form>
+  </div>
+  <!-- Update Category End -->
+</div>
+<hr />
+<div class="loadingIcon">
+  <div *ngIf="loading" class="spinner-border" role="status">
+    <span class="sr-only"></span>
+  </div>
+</div>
+<div *ngIf="!loading" appAddMargin>
+  <h3 class="text-center">List</h3>
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Category</th>
+        <th scope="col">Sub-Categories</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let category of categories; let i = index">
+        <th scope="row">{{ i + 1 }}</th>
+        <td>
+          {{ category.category }}
+          <button
+            class="edit-button btn btn-outline-dark"
+            (click)="sendCategoryDataToForm(category.category, category.id)"
+          >
+            Edit
+          </button>
+        </td>
+
+        <td *ngFor="let subCategoryValue of category.subCategory">
+          {{ subCategoryValue }}
+
+          <button
+            class="edit-button btn btn-outline-dark"
+            (click)="
+              sendSubCategoryDataToForm(
+                category.category,
+                subCategoryValue,
+                category.id
+              )
+            "
+          >
+            Edit
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

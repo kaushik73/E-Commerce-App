@@ -1,0 +1,14 @@
+div {
+  text-transform: capitalize;
+}
+.font-weight-bold {
+  font-weight: bold;
+  font-size: 20px;
+}
+.order-content {
+  font-size: 20px;
+}
+.user-name {
+  color: darkblue;
+  text-transform: capitalize;
+}

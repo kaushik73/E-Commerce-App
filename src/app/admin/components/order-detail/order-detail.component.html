@@ -1,0 +1,36 @@
+<h2 class="text-center">
+  Order Details of
+  <span class="user-name">
+    {{ orderDetail.userData.userName }}
+  </span>
+</h2>
+<hr />
+<div appAddMargin>
+  <div *ngFor="let orders of orderDetail.orders; let i = index">
+    <div class="order-number">
+      <span class="font-weight-bold"> Order Number : </span>
+      <span class="order-content">{{ i + 1 }} </span>
+    </div>
+    <div>
+      <span class="font-weight-bold"> Title : </span>
+      <span class="order-content">{{ orders.title }}</span>
+    </div>
+    <div>
+      <span class="font-weight-bold"> Price : </span>
+      <span class="order-content">{{ orders.price }}</span>
+    </div>
+    <div>
+      <span class="font-weight-bold"> Description : </span>
+      <span class="order-content">{{ orders.description }}</span>
+    </div>
+    <div>
+      <span class="font-weight-bold"> Category : </span>
+      <span class="order-content">{{ orders.category }}</span>
+    </div>
+    <div>
+      <span class="font-weight-bold"> Sub Category : </span>
+      <span class="order-content">{{ orders.subCategory }}</span>
+    </div>
+    <hr />
+  </div>
+</div>

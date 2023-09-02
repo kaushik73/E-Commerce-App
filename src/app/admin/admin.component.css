@@ -1,0 +1,53 @@
+.sidenav {
+  height: 100%;
+  width: 150px;
+  position: fixed;
+  z-index: 1;
+  top: 0%;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  padding-top: 40px;
+  z-index: 4;
+}
+.sidenav p {
+  font-size: 20px;
+  color: White;
+  margin-right: 5px;
+}
+.sidenav a {
+  padding: 6px 6px 6px 32px;
+  text-decoration: none;
+  color: #6d6a6a;
+  display: block;
+}
+hr {
+  border-top: 2px solid red;
+}
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+.heading {
+  cursor: pointer;
+  padding-right: 10px;
+}
+.admin-navbar {
+  position: absolute;
+  top: 0%;
+  background-color: white;
+  height: 72px;
+  width: 100%;
+  z-index: 3;
+}
+.main {
+  font-size: 25px;
+  margin-top: 16px;
+  color: darkblue;
+  font-weight: bold;
+  text-decoration: underline;
+}
+.logout-button {
+  position: absolute;
+  bottom: 3%;
+  left: 20%;
+}

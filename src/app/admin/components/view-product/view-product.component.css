@@ -1,0 +1,20 @@
+.container {
+  margin-top: 2%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+  border: 1px solid black;
+}
+.text-center {
+  margin-left: 150px;
+}
+p {
+  font-size: 20px;
+}
+.font-weight-bold {
+  font-weight: bold;
+}
+div {
+  text-transform: capitalize;
+}

@@ -1,0 +1,100 @@
+* {
+  --primary-color: rgb(71, 98, 255);
+  --text-color: rgb(0, 0, 0);
+  --secondary-color: rgba(0, 128, 255, 0.822);
+  box-sizing: border-box;
+}
+body {
+  background-color: var(--primary-color);
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+.error-msg {
+  color: red;
+  font-size: 18px;
+  margin: 0;
+  padding: 0;
+  margin-left: 10px;
+}
+.container {
+  width: 500px;
+  border-radius: 0.6rem;
+  padding: 10px;
+  background-color: var(--primary-color);
+  box-shadow: 6px 7px 21px 0px rgba(0, 0, 0, 0.75);
+  margin: 10vh auto;
+  min-height: 50vh;
+}
+.add-employee {
+  padding: 10px 20px;
+}
+.add-employee h2 {
+  text-align: center;
+  margin: 13px 0px;
+  color: white;
+}
+input {
+  font-weight: bold;
+  font-size: 100%;
+}
+input::placeholder {
+  color: black;
+  font-weight: 100;
+}
+.form-control {
+  margin-bottom: 5px;
+  padding-bottom: 5px;
+  position: relative;
+  background-color: rgba(61, 28, 28, 0.242);
+}
+.form-control label {
+  color: white;
+  display: block;
+  margin-bottom: 5px;
+}
+.form-control input {
+  border-radius: 6px;
+  background: var(--primary-color);
+  color: var(--text-color);
+  box-shadow: inset 3px 3px 7px #e9bd7c, inset -3px -3px 7px #ffd98e;
+  min-height: 2.6em;
+  display: block;
+  width: 100%;
+  font-size: 18px;
+  padding: 10px;
+}
+.btn-submit,
+.already-user {
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+  background: var(--primary-color);
+  box-shadow: 4px 4px 8px #c19c66, -4px -4px 8px #fffaa4;
+  border: 1px solid #ec263c66;
+  color: #fff;
+  font-size: 16px;
+  padding: 0.6rem 1.2rem;
+  border-radius: 15px;
+  display: block;
+  margin: auto;
+  margin-top: 1.2rem;
+  width: 250px;
+  font-family: "Times New Roman", Times, serif;
+}
+.btn-submit[disabled] {
+  background-color: rgb(252, 0, 0);
+  color: rgb(168, 151, 151);
+  cursor: default;
+  box-shadow: 4px 4px 8px #c19c66, -4px -4px 8px #fffaa4;
+  border-radius: 15px;
+  width: 250px;
+  margin: auto;
+  margin-top: 14px;
+}
+a {
+  text-decoration: none;
+}
+.input-password{
+  width: 90%;
+}

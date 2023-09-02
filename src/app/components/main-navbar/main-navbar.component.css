@@ -1,0 +1,55 @@
+.search-form {
+  border-radius: 3px;
+  width: 450px;
+  margin-left: 35px;
+  margin-top: 3px;
+}
+.search-icon {
+  position: absolute;
+  z-index: 10;
+  right: 52%;
+  top: 20px;
+  color: blue;
+}
+.heading {
+  cursor: pointer;
+  font-size: 40px;
+}
+.heading-title {
+  font-size: 30px;
+}
+.login-button {
+  cursor: pointer;
+  font-size: 15px;
+  margin-left: 341px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+.login-button:hover {
+  background-color: blue;
+  border-radius: 12px;
+}
+.cart-button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
+  margin-right: 40px;
+}
+.wishlist-button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
+  margin-right: 0px;
+}
+.cart-icon,
+.heart-icon {
+  font-size: 30px;
+  color: #ffffff;
+}
+.badge {
+  font-size: 10px;
+}

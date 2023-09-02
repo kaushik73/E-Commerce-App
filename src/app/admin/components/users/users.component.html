@@ -1,0 +1,31 @@
+<div appAddMargin>
+  <h2 class="text-center">Users</h2>
+  <div class="loading-icon">
+    <div *ngIf="loading" class="spinner-border" role="status">
+      <span class="sr-only"></span>
+    </div>
+  </div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Password</th>
+        <th scope="col">Contact Number</th>
+        <th scope="col">Admin</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users; let i = index">
+        <th scope="row">{{ i + 1 }}</th>
+        <td class="user-name">{{ user.name }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.password }}</td>
+        <td>{{ user.contactNumber }}</td>
+        <td *ngIf="user.isAdmin"><i class="fas fa-solid fa-check"></i></td>
+        <td class="cross-sign" *ngIf="!user.isAdmin">x</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

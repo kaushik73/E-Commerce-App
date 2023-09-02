@@ -1,0 +1,61 @@
+<div class="main-navbar shadow-sm">
+  <span *ngIf="categoryLoading" class="loading shadow-sm">loading....</span>
+  <nav class="navbar navbar-expand-lg p-1">
+    <div class="container-fluid">
+      <div class="d-flex">
+        <div class="category-menu">
+          <ul>
+            <li class="all-products" (click)="sendCategoryNameToParent('')">
+              All Products
+            </li>
+            <li
+              class="category-data"
+              *ngFor="let category of categories"
+              (mouseenter)="onSelectCategory(category.category)"
+              (mouseleave)="onMouseLeave()"
+            >
+              {{ category.category }}
+              <ul
+                *ngIf="
+                  showSubcategories && category.category === selectedCategory
+                "
+                class="subcategories"
+              >
+                <li (click)="sendCategoryNameToParent(category.category)">
+                  {{ category.category }}
+                </li>
+                <li
+                  class="subcategory-data"
+                  *ngFor="let subcategory of category.subCategory"
+                  (click)="
+                    onSelectSubCategory(subcategory);
+                    sendCategoryNameToParent(subcategory)
+                  "
+                >
+                  {{ subcategory }}
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <div class="sorting-buttons-container">
+          <select
+            (change)="sendFilterNameToParent(sortingType)"
+            [(ngModel)]="sortingType"
+            class="select-option"
+          >
+            <option class="sorting-option" selected disabled [value]="'none'">
+              Price Sorting
+            </option>
+            <option class="sorting-option" [value]="'L-to-H'">
+              Low To High
+            </option>
+            <option class="sorting-option" [value]="'H-to-L'">
+              High To Low
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </nav>
+</div>

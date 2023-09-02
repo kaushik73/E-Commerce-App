@@ -1,0 +1,110 @@
+<div class="container">
+  <div *ngIf="noProductExist">
+    <img
+      class="no-products-to-show"
+      src="../../../assets/images/no-product-found.jpg"
+    />
+  </div>
+  <div class="card" *ngIf="!noProductExist">
+    <div class="image-container img slider">
+      <div>
+        <div
+          *ngIf="showSliderArrows"
+          (click)="goToPrevious()"
+          class="leftArrow"
+        >
+          ❰
+        </div>
+        <div *ngIf="showSliderArrows" (click)="goToNext()" class="rightArrow">
+          ❱
+        </div>
+      </div>
+      <div
+        class="slide"
+        [ngStyle]="{ 'background-image': getCurrentSlideUrl() }"
+      ></div>
+    </div>
+    <div class="details-container">
+      <h3 class="product-title">
+        <span class="rating-heading"> Name : </span>{{ productDetail.title }}
+      </h3>
+      <h4 class="rating">
+        <span class="rating-heading"> Rating : </span>
+        <span class="rating-content"> {{ productDetail.rating }}</span>
+      </h4>
+      <div class="description">
+        <span class="description-heading"> Description : </span>
+        <span class="description-content">
+          {{ productDetail.description }}</span
+        >
+      </div>
+      <h4 class="price">
+        <span class="price-heading"> Current price: </span>
+        <span class="price-content"> ${{ productDetail.price }}</span>
+      </h4>
+      <h5 class="category">
+        <span class="category-heading"> Catagory: </span>
+        <span class="category-content"> {{ productDetail.category }}</span>
+      </h5>
+      <h5 class="category">
+        <span class="category-heading"> Sub-Catagory: </span>
+        <span class="category-content"> {{ productDetail.subCategory }}</span>
+      </h5>
+      <h5 class="brand">
+        <span class="brand-heading"> brand: </span>
+        <span class="brand-content"> {{ productDetail.brand }}</span>
+      </h5>
+      <div class="action">
+        <button class="add-to-cart" (click)="addToCart()">Add to cart</button>
+        <button class="mx-3 add-to-wishlist" (click)="addToWishlist()">
+          Wishlist
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<hr />
+<h3 class="text-center" *ngIf="!noProductExist">
+  <span class="similar-product-heading">
+    More Simiar Products are Shown Below
+  </span>
+</h3>
+<div class="loading-icon" *ngIf="!noProductExist">
+  <div *ngIf="loading" class="spinner-border" role="status">
+    <span class="sr-only"></span>
+  </div>
+</div>
+<div class="card-deck" *ngIf="!noProductExist">
+  <div
+    class="card-similar-product"
+    *ngFor="let product of similarProducts | slice : 0 : 4"
+  >
+    <img
+      (click)="showSimilarProductDetail(product.id)"
+      src="{{ product.thumbnail }}"
+      class="product-image"
+    />
+    <h4 class="text-center card-title title shrink-content">
+      Title:
+      <span>
+        {{ product.title | uppercase }}
+      </span>
+    </h4>
+    <hr />
+    <h4 class="text-center card-title shrink-content">
+      Brand : {{ product.brand }}
+    </h4>
+    <h4 class="text-center card-title shrink-content">
+      Price : {{ product.price }}
+    </h4>
+    <br />
+    <h4>
+      <button
+        class="btn btn-primary show-detail-button"
+        (click)="showSimilarProductDetail(product.id)"
+      >
+        View More
+      </button>
+    </h4>
+  </div>
+</div>
